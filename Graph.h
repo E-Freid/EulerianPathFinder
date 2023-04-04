@@ -1,15 +1,15 @@
 
 #ifndef PROGPROJ_GRAPH_H
 #define PROGPROJ_GRAPH_H
-#include <list>
 
+#include <list>
 using namespace std;
 
 typedef struct edge
 {
     int from;
     int to;
-    bool visited;
+    bool visited = false;
     struct edge* antiSimetricEdgePointer = nullptr;
 } Edge;
 
@@ -17,20 +17,23 @@ typedef struct adjListElement
 {
     list<Edge> neighbors;
     list<Edge>::iterator currUnvisitedEdge;
-};
+} AdjListElement;
+
+enum COLOR{WHITE, GREY, BLACK};
 
 class Graph
 {
-private:
+protected:
     int m_NumOfNodes;
-    adjListElement* m_adjList;
+    int m_NumOfEdges;
+    AdjListElement* m_adjList;
 
-    Graph(int i_NumOfNodes);
+    Graph(int i_NumOfNodes, int i_NumOfEdges);
 
 public:
-    virtual void addEdges(Edge* i_edgesList, int i_numOfEdges) = 0;
-    virtual bool checkIfGraphEulerian() = 0;
-    virtual void printEularGraphIfExists() = 0; // TODO: avi should decide if to keep method here, or in sons
+    virtual void AddEdges(Edge* i_EdgesList, int i_NumOfEdges) = 0;
+    virtual bool CheckIfGraphEulerian() = 0;
+    virtual void PrintEularCircleIfExists() = 0; // TODO: avi should decide if to keep method here, or in sons
     virtual ~Graph();
 
 };
