@@ -1,5 +1,13 @@
-//
-// Created by Noel Freid on 03/04/2023.
-//
-
 #include "Graph.h"
+
+Graph::Graph(int i_NumOfNodes)
+{
+    this->m_NumOfNodes = i_NumOfNodes;
+    this->m_adjList = new adjListElement[i_NumOfNodes];
+}
+
+Graph::~Graph()
+{
+    delete[] this->m_adjList;
+}
+

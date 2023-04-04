@@ -1,23 +1,29 @@
 
 #ifndef PROGPROJ_GRAPH_H
 #define PROGPROJ_GRAPH_H
-using namespace std;
-
 #include <list>
+
+using namespace std;
 
 typedef struct edge
 {
     int from;
     int to;
     bool visited;
+    struct edge* antiSimetricEdgePointer = nullptr;
 } Edge;
 
+typedef struct adjListElement
+{
+    list<Edge> neighbors;
+    list<Edge>::iterator currUnvisitedEdge;
+};
 
 class Graph
 {
 private:
     int m_NumOfNodes;
-    list<Edge>* m_adjList;
+    adjListElement* m_adjList;
 
     Graph(int i_NumOfNodes);
 
