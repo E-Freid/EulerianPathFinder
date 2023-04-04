@@ -61,12 +61,13 @@ void UndirectedGraph::PrintEularCircleIfExists()
     bool graphIsEulerian = this->CheckIfGraphEulerian();
     if(graphIsEulerian)
     {
+        cout << "The graph is aulerian" << endl;
         list<int> eularCircle = this->getEulerCircle();
         this->printEulerianCircle(eularCircle);
     }
     else
     {
-        cout << "Graph is not Eulerian and doesn't have an Euler circle" << endl;
+        cout << "Graph is not aulerian!" << endl;
     }
 }
 
@@ -211,13 +212,14 @@ void UndirectedGraph::visit(int i_NodeToVisit, COLOR *i_Colors)
 void UndirectedGraph::printEulerianCircle(list<int> i_EulerCircle)
 {
     int prevNode = -1;
+    cout << "(";
     for(int currNode: i_EulerCircle)
     {
         if(prevNode != currNode)
         {
-            cout << currNode+1 << " ";
+            cout << currNode+1 << ",";
         }
         prevNode = currNode;
     }
-    cout << endl;
+    cout << "\b)" << endl;
 }
