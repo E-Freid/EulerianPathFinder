@@ -85,27 +85,6 @@ bool UndirectedGraph::IsGraphConnected()
     return isGraphConnected;
 }
 
-void UndirectedGraph::initColorsToWhite(COLOR *i_Colors)
-{
-    for(int i=0; i<this->m_NumOfNodes; ++i)
-    {
-        i_Colors[i] = WHITE;
-    }
-}
-
-bool UndirectedGraph::checkIfAllNodesVisited(COLOR* i_Colors)
-{
-    bool visitedAllNodes = true;
-    for (int i = 0; i < this->m_NumOfNodes; ++i)
-    {
-        if(i_Colors[i] != BLACK)
-        {
-            visitedAllNodes = false;
-        }
-    }
-    return visitedAllNodes;
-}
-
 bool UndirectedGraph::AreDegreesEven()
 {
     int* degrees = this->getDegrees();
@@ -137,42 +116,6 @@ bool UndirectedGraph::checkIfDegreesAreEven(int *i_Degrees)
     return areDegreesEven;
 }
 
-list<int> UndirectedGraph::getEulerCircle()
-{
-    this->initPosOfIteratorsInAdjList();
-    list<int> eulerCircle = this->findCircuit(0);
-    auto nodeWithUnvisitedEdges = eulerCircle.begin();
-    while(nodeWithUnvisitedEdges != eulerCircle.end())
-    {
-        if(this->m_adjList[*nodeWithUnvisitedEdges].currUnvisitedEdge != this->m_adjList[*nodeWithUnvisitedEdges].neighbors.end())
-        {
-            list<int> newCircle = this->findCircuit(*nodeWithUnvisitedEdges);
-            eulerCircle.splice(nodeWithUnvisitedEdges, newCircle);
-        }
-        nodeWithUnvisitedEdges++;
-    }
-    return eulerCircle;
-}
-
-list<int> UndirectedGraph::findCircuit(int i_StartingNode)
-{
-    int currentNode = i_StartingNode;
-    list<int> circle = {currentNode};
-    do
-    {
-        this->advanceToTheNextUnvisitedEdge(currentNode);
-        if(this->m_adjList[currentNode].currUnvisitedEdge == this->m_adjList[currentNode].neighbors.end())
-        {
-            break;
-        }
-        int nextNode = this->m_adjList[currentNode].currUnvisitedEdge->to;
-        this->markEdgeAsVisited(currentNode);
-        circle.push_back(nextNode);
-        currentNode = nextNode;
-    } while(this->m_adjList[currentNode].currUnvisitedEdge != m_adjList[currentNode].neighbors.end());
-    return circle;
-}
-
 void UndirectedGraph::markEdgeAsVisited(int i_CurrNode)
 {
     this->m_adjList[i_CurrNode].currUnvisitedEdge->visited = true;
@@ -186,40 +129,4 @@ void UndirectedGraph::advanceToTheNextUnvisitedEdge(int i_CurrNode)
     {
         this->m_adjList[i_CurrNode].currUnvisitedEdge++;
     }
-}
-
-void UndirectedGraph::initPosOfIteratorsInAdjList()
-{
-    for (int i = 0; i < this->m_NumOfNodes; ++i)
-    {
-        this->m_adjList[i].currUnvisitedEdge = this->m_adjList[i].neighbors.begin();
-    }
-}
-
-void UndirectedGraph::visit(int i_NodeToVisit, COLOR *i_Colors)
-{
-    i_Colors[i_NodeToVisit] = GREY;
-    for(auto neighbor: this->m_adjList[i_NodeToVisit].neighbors)
-    {
-        if(i_Colors[neighbor.to] == WHITE)
-        {
-            this->visit(neighbor.to, i_Colors);
-        }
-    }
-    i_Colors[i_NodeToVisit] = BLACK;
-}
-
-void UndirectedGraph::printEulerianCircle(list<int> i_EulerCircle)
-{
-    int prevNode = -1;
-    cout << "(";
-    for(int currNode: i_EulerCircle)
-    {
-        if(prevNode != currNode)
-        {
-            cout << currNode+1 << ",";
-        }
-        prevNode = currNode;
-    }
-    cout << "\b)" << endl;
 }
