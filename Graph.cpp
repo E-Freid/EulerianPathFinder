@@ -107,3 +107,18 @@ list<int> Graph::getEulerCircle()
     }
     return eulerCircle;
 }
+
+void Graph::PrintEularCircleIfExists()
+{
+    bool graphIsEulerian = this->CheckIfGraphEulerian();
+    if(graphIsEulerian)
+    {
+        cout << "The graph is aulerian" << endl;
+        list<int> eularCircle = this->getEulerCircle();
+        this->printEulerianCircle(eularCircle);
+    }
+    else
+    {
+        cout << "Graph is not aulerian!" << endl;
+    }
+}

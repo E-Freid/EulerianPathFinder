@@ -17,7 +17,6 @@ public:
     UndirectedGraph(int i_NumOfNodes, int i_NumOfEdges);
     void AddEdges(Edge* i_EdgesList, int i_NumOfEdges) override;
     bool CheckIfGraphEulerian() override;
-    void PrintEularCircleIfExists() override;
     bool IsGraphConnected();
     bool AreDegreesEven();
     void printGraphInfo();

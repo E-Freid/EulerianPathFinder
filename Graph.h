@@ -42,7 +42,7 @@ protected:
 public:
     virtual void AddEdges(Edge* i_EdgesList, int i_NumOfEdges) = 0;
     virtual bool CheckIfGraphEulerian() = 0;
-    virtual void PrintEularCircleIfExists() = 0; // TODO: avi should decide if to keep method here, or in sons
+    virtual void PrintEularCircleIfExists();
     virtual ~Graph();
 };
 

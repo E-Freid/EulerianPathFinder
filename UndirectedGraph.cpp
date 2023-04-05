@@ -56,21 +56,6 @@ bool UndirectedGraph::CheckIfGraphEulerian()
     return graphIsConnected && degreesAreEven;
 }
 
-void UndirectedGraph::PrintEularCircleIfExists()
-{
-    bool graphIsEulerian = this->CheckIfGraphEulerian();
-    if(graphIsEulerian)
-    {
-        cout << "The graph is aulerian" << endl;
-        list<int> eularCircle = this->getEulerCircle();
-        this->printEulerianCircle(eularCircle);
-    }
-    else
-    {
-        cout << "Graph is not aulerian!" << endl;
-    }
-}
-
 bool UndirectedGraph::IsGraphConnected()
 {
     bool isGraphConnected = true;
