@@ -1,4 +1,3 @@
-
 #include "UndirectedGraph.h"
 
 UndirectedGraph::UndirectedGraph(int i_NumOfNodes, int i_NumOfEdges): Graph(i_NumOfNodes, i_NumOfEdges){}

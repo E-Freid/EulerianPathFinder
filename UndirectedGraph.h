@@ -1,4 +1,3 @@
-
 #ifndef PROGPROJ_UNDIRECTEDGRAPH_H
 #define PROGPROJ_UNDIRECTEDGRAPH_H
 #include "Graph.h"
