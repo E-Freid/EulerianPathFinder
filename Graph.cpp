@@ -15,6 +15,15 @@ Graph::~Graph()
     delete[] this->m_adjList;
 }
 
+void Graph::AddEdges(Edge* i_EdgesList, int i_NumOfEdges)
+{
+    for (int i = 0; i < i_NumOfEdges; ++i)
+    {
+        Edge currEdgeToAdd = i_EdgesList[i];    // (1,2,false,nullptr)
+        this->addSingleEdge(currEdgeToAdd);
+    }
+}
+
 void Graph::printEulerianCircle(list<int> i_EulerCircle)
 {
     int prevNode = -1;

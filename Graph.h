@@ -36,11 +36,12 @@ protected:
     bool checkIfAllNodesVisited(COLOR* i_Colors);
     list<int> findCircuit(int i_StartingNode);
     list<int> getEulerCircle();
+    virtual void addSingleEdge(Edge i_EdgeToAdd) = 0;
     virtual void markEdgeAsVisited(int i_CurrNode) = 0;
     virtual void advanceToTheNextUnvisitedEdge(int i_CurrNode) = 0;
 
 public:
-    virtual void AddEdges(Edge* i_EdgesList, int i_NumOfEdges) = 0;
+    virtual void AddEdges(Edge* i_EdgesList, int i_NumOfEdges);
     virtual bool CheckIfGraphEulerian() = 0;
     virtual void PrintEularCircleIfExists();
     virtual ~Graph();

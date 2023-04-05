@@ -6,7 +6,7 @@
 
 class UndirectedGraph: public Graph {
 private:
-    void addSingleEdge(Edge i_EdgeToAdd);
+    void addSingleEdge(Edge i_EdgeToAdd) override;
     void connectEdgesPointers(int i_FirstNode, int i_SecondNode);
     bool checkIfDegreesAreEven(int* i_Degrees);
     int* getDegrees();
@@ -15,7 +15,6 @@ private:
 
 public:
     UndirectedGraph(int i_NumOfNodes, int i_NumOfEdges);
-    void AddEdges(Edge* i_EdgesList, int i_NumOfEdges) override;
     bool CheckIfGraphEulerian() override;
     bool IsGraphConnected();
     bool AreDegreesEven();

@@ -3,15 +3,6 @@
 
 UndirectedGraph::UndirectedGraph(int i_NumOfNodes, int i_NumOfEdges): Graph(i_NumOfNodes, i_NumOfEdges){}
 
-void UndirectedGraph::AddEdges(Edge* i_EdgesList, int i_NumOfEdges)
-{
-    for (int i = 0; i < i_NumOfEdges; ++i)
-    {
-        Edge currEdgeToAdd = i_EdgesList[i];    // (1,2,false,nullptr)
-        this->addSingleEdge(currEdgeToAdd);
-    }
-}
-
 void UndirectedGraph::addSingleEdge(Edge i_EdgeToAdd)
 {
     i_EdgeToAdd.from--;
