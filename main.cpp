@@ -4,9 +4,10 @@
 #include "DirectedGraph.h"
 
 int main() {
+    Graph* graph;
+    UserInterface UI;
+
     try{
-        Graph* graph;
-        UserInterface UI;
         bool isDirected = UI.askUserIfGraphDirected();
         int numOfVertex = UI.getNumOfVertex();
         int numOfEdges = UI.getNumOfEdges(isDirected, numOfVertex);
@@ -25,13 +26,16 @@ int main() {
         graph->PrintEularCircleIfExists();
 
         delete[] edges;
+        delete graph;
     }
     catch (std::exception &ex) {
         cout << "invalid input";
+        delete graph;
         exit(1);
     }
     catch (...) {
         cout << "Something went wrong";
+        delete graph;
         exit(1);
     }
 }
