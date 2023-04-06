@@ -1,23 +1,37 @@
 #include <iostream>
+#include "UserInterface.h"
 #include "UndirectedGraph.h"
 #include "DirectedGraph.h"
 
 int main() {
-    Graph* graph;
-    bool isDirected = false;
-    int numOfVertex = 4;
-    int numOfEdges = 4;
+    try{
+        Graph* graph;
+        UserInterface UI;
+        bool isDirected = UI.askUserIfGraphDirected();
+        int numOfVertex = UI.getNumOfVertex();
+        int numOfEdges = UI.getNumOfEdges(isDirected, numOfVertex);
 
-    if(isDirected == true)
-    {
-        graph = new DirectedGraph(numOfVertex, numOfEdges);
-    }
-    else
-    {
-        graph = new UndirectedGraph(4, 4);
-    }
+        if(isDirected == true)
+        {
+            graph = new DirectedGraph(numOfVertex, numOfEdges);
+        }
+        else
+        {
+            graph = new UndirectedGraph(numOfVertex, numOfEdges);
+        }
 
-    Edge edges[] = {{1,2}, {2,3}, {3,4}, {4,1}};
-    graph->AddEdges(edges, 4);
-    graph->PrintEularCircleIfExists();
+        Edge* edges = UI.getEdges(numOfVertex, numOfEdges);
+        graph->AddEdges(edges, numOfEdges);
+        graph->PrintEularCircleIfExists();
+
+        delete[] edges;
+    }
+    catch (std::exception &ex) {
+        cout << "invalid input";
+        exit(1);
+    }
+    catch (...) {
+        cout << "Something went wrong";
+        exit(1);
+    }
 }

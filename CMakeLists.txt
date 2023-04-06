@@ -3,4 +3,4 @@ project(ProgProj)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(ProgProj main.cpp Graph.cpp Graph.h UndirectedGraph.cpp UndirectedGraph.h DirectedGraph.h DirectedGraph.cpp)
+add_executable(ProgProj main.cpp Graph.cpp Graph.h UndirectedGraph.cpp UndirectedGraph.h DirectedGraph.h DirectedGraph.cpp UserInterface.h UserInterface.cpp Utils.h Utils.cpp)
