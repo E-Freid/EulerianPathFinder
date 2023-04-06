@@ -5,15 +5,18 @@
 
 class DirectedGraph: public Graph {
 private:
-    DirectedGraph getTransposedGraph();
+    void addSingleEdge(Edge i_EdgeToAdd) override;
+    int* getVertexOutDegrees();
+    int* getVertexInDegrees();
+    bool checkInAndOutDegreeForEachVertex(int* i_InDegreesArr, int* i_OutDegreesArr);
     void markEdgeAsVisited(int i_CurrNode) override;
     void advanceToTheNextUnvisitedEdge(int i_CurrNode) override;
+    DirectedGraph* getTransposedGraph();
+    bool doesVisitOnGraphVisitingAllNodes();
 
 public:
     DirectedGraph(int i_NumOfNodes, int i_NumOfEdges);
-    void AddEdges(Edge* i_EdgesList, int i_NumOfEdges) override;
     bool CheckIfGraphEulerian() override;
-    void PrintEularCircleIfExists() override;
     bool IsGraphStronglyConnected();
     bool DoesEachVertexInDegreeEqualsOutDegree();
 };

@@ -1,4 +1,6 @@
 #include "Graph.h"
+#include "UndirectedGraph.h"
+#include "DirectedGraph.h"
 #include <iostream>
 
 using namespace std;
@@ -79,16 +81,28 @@ list<int> Graph::findCircuit(int i_StartingNode)
     list<int> circle = {currentNode};
     do
     {
-        this->advanceToTheNextUnvisitedEdge(currentNode);
+        if(typeid(*this).name() == typeid(UndirectedGraph).name())
+        {
+            this->advanceToTheNextUnvisitedEdge(currentNode);
+        }
+
         if(this->m_adjList[currentNode].currUnvisitedEdge == this->m_adjList[currentNode].neighbors.end())
         {
             break;
         }
+
         int nextNode = this->m_adjList[currentNode].currUnvisitedEdge->to;
         this->markEdgeAsVisited(currentNode);
         circle.push_back(nextNode);
+        if(typeid(*this).name() == typeid(DirectedGraph).name())
+        {
+            cout << "here" << endl;
+            this->advanceToTheNextUnvisitedEdge(currentNode);
+        }
+
         currentNode = nextNode;
     } while(this->m_adjList[currentNode].currUnvisitedEdge != m_adjList[currentNode].neighbors.end());
+
     return circle;
 }
 
