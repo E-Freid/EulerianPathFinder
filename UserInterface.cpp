@@ -75,17 +75,19 @@ Edge *UserInterface::getEdges(int i_NumOfVertex, int i_NumOfEdges) noexcept(fals
 
 Edge UserInterface::getSingleEdge(int i_NumOfVertex) noexcept(false)
 {
-    bool isFromValidVertex, isToValidVertex;
+    bool isFromValidVertex, isToValidVertex, isLoopEdge;
     Edge newEdge;
     int from, to;
 
     cin >> from >> to;
     isFromValidVertex = Graph::isValidVertex(i_NumOfVertex, from);
     isToValidVertex = Graph::isValidVertex(i_NumOfVertex, to);
-    if(!isFromValidVertex || !isToValidVertex)
+    isLoopEdge = from == to;
+    if(!isFromValidVertex || !isToValidVertex || isLoopEdge)
     {
-        throw std::invalid_argument("Invalid vertex was given");
+        throw std::invalid_argument("Invalid edge was given");
     }
+    //TODO: Validate Duplication of edges?
     else
     {
         newEdge.from = from;
