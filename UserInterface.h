@@ -6,7 +6,7 @@
 class UserInterface
 {
 private:
-    int UserInterface::getIntegerFromUser() noexcept(false);
+    int getIntegerFromUser() noexcept(false);
     Edge getSingleEdge(int i_NumOfVertex) noexcept(false);
 
 public:
