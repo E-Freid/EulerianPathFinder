@@ -121,12 +121,16 @@ list<int> Graph::getEulerCircle()
     auto nodeWithUnvisitedEdges = eulerCircle.begin();
     while(nodeWithUnvisitedEdges != eulerCircle.end())
     {
+        this->advanceToTheNextUnvisitedEdge(*nodeWithUnvisitedEdges);
         if(this->m_adjList[*nodeWithUnvisitedEdges].currUnvisitedEdge != this->m_adjList[*nodeWithUnvisitedEdges].neighbors.end())
         {
             list<int> newCircle = this->findCircuit(*nodeWithUnvisitedEdges);
-            eulerCircle.splice(nodeWithUnvisitedEdges, newCircle);
+            nodeWithUnvisitedEdges = eulerCircle.insert(nodeWithUnvisitedEdges, newCircle.begin(), newCircle.end());
         }
-        nodeWithUnvisitedEdges++;
+        else
+        {
+            nodeWithUnvisitedEdges++;
+        }
     }
     return eulerCircle;
 }
