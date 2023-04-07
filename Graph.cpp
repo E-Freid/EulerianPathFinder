@@ -1,7 +1,8 @@
+#include <iostream>
+#include "Utils.h"
 #include "Graph.h"
 #include "UndirectedGraph.h"
 #include "DirectedGraph.h"
-#include <iostream>
 
 using namespace std;
 
@@ -96,7 +97,6 @@ list<int> Graph::findCircuit(int i_StartingNode)
         circle.push_back(nextNode);
         if(typeid(*this).name() == typeid(DirectedGraph).name())
         {
-            cout << "here" << endl;
             this->advanceToTheNextUnvisitedEdge(currentNode);
         }
 
@@ -144,4 +144,23 @@ void Graph::PrintEularCircleIfExists()
     {
         cout << "Graph is not aulerian!" << endl;
     }
+}
+
+int Graph::GetMaxNumOfEdgesInGraph(bool i_IsDirected, int i_NumOfVertex) {
+    int max;
+
+    if(i_IsDirected == true)
+    {
+        max = i_NumOfVertex * (i_NumOfVertex - 1);
+    }
+    else
+    {
+        max = Utils::Factorial(i_NumOfVertex) / (Utils::Factorial(2) * Utils::Factorial(i_NumOfVertex - 2)); //Calculate (i_NumOfVertx nCr 2)
+    }
+
+    return max;
+}
+
+bool Graph::isValidVertex(int i_NumOfVertex, int i_VertexNum) {
+    return i_VertexNum > 0 && i_VertexNum <= i_NumOfVertex;
 }

@@ -40,10 +40,13 @@ protected:
     virtual void advanceToTheNextUnvisitedEdge(int i_CurrNode) = 0;
 
 public:
+    virtual ~Graph();
     virtual void AddEdges(Edge* i_EdgesList, int i_NumOfEdges);
     virtual bool CheckIfGraphEulerian() = 0;
     virtual void PrintEularCircleIfExists();
-    virtual ~Graph();
+    static int GetMaxNumOfEdgesInGraph(bool i_IsDirected, int i_NumOfVertex);
+    static bool isValidVertex(int i_NumOfVertex, int i_VertexNum);
+
 };
 
 
