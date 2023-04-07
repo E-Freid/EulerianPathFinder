@@ -121,12 +121,37 @@ list<int> Graph::getEulerCircle()
     auto nodeWithUnvisitedEdges = eulerCircle.begin();
     while(nodeWithUnvisitedEdges != eulerCircle.end())
     {
+        cout << "Current Circle is: " << endl;
+        for(auto node: eulerCircle)
+        {
+            cout << node + 1 << " ";
+        }
+        cout << endl;
+        cout << "=======================================" << endl;
+        cout << "Now checking " << *nodeWithUnvisitedEdges + 1 << endl;
+        this->advanceToTheNextUnvisitedEdge(*nodeWithUnvisitedEdges);
+
         if(this->m_adjList[*nodeWithUnvisitedEdges].currUnvisitedEdge != this->m_adjList[*nodeWithUnvisitedEdges].neighbors.end())
         {
+            cout << "Next unvisited edge is to " << this->m_adjList[*nodeWithUnvisitedEdges].currUnvisitedEdge->to + 1 << endl;
             list<int> newCircle = this->findCircuit(*nodeWithUnvisitedEdges);
-            eulerCircle.splice(nodeWithUnvisitedEdges, newCircle);
+            nodeWithUnvisitedEdges = eulerCircle.insert(nodeWithUnvisitedEdges, newCircle.begin(), newCircle.end());
         }
-        nodeWithUnvisitedEdges++;
+
+        cout << "Circle after adding: " << endl;
+        for(auto node: eulerCircle)
+        {
+            cout << node + 1 << " ";
+        }
+        cout << endl;
+        cout << "=======================================" << endl;
+
+        if(this->m_adjList[*nodeWithUnvisitedEdges].currUnvisitedEdge == this->m_adjList[*nodeWithUnvisitedEdges].neighbors.end())
+        {
+            cout << "no more unvisited edges for " << *nodeWithUnvisitedEdges+1 << endl;
+            cout << "==================================" << endl;
+            nodeWithUnvisitedEdges++;
+        }
     }
     return eulerCircle;
 }
