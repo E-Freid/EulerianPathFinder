@@ -22,7 +22,7 @@ void Graph::AddEdges(Edge* i_EdgesList, int i_NumOfEdges)
 {
     for (int i = 0; i < i_NumOfEdges; ++i)
     {
-        Edge currEdgeToAdd = i_EdgesList[i];    // (1,2,false,nullptr)
+        Edge currEdgeToAdd = i_EdgesList[i];
         this->addSingleEdge(currEdgeToAdd);
     }
 }
@@ -146,7 +146,7 @@ void Graph::PrintEularCircleIfExists()
     }
     else
     {
-        cout << "Graph is not aulerian!" << endl;
+        cout << "The graph is not aulerian" << endl;
     }
 }
 
