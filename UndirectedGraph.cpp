@@ -11,7 +11,9 @@ void UndirectedGraph::addSingleEdge(Edge i_EdgeToAdd)
     from = i_EdgeToAdd.from;
     to = i_EdgeToAdd.to;
 
-    Edge antiSimetricEdge = {to, from};
+    Edge antiSimetricEdge;
+    antiSimetricEdge.to = from;
+    antiSimetricEdge.from = to;
     this->m_adjList[from].neighbors.push_back(i_EdgeToAdd);
     this->m_adjList[to].neighbors.push_back(antiSimetricEdge);
 

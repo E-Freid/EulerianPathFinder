@@ -31,7 +31,15 @@ int UserInterface::getIntegerFromUser() noexcept(false)
 
 int UserInterface::getNumOfVertex() noexcept(false)
 {
-    return this->getIntegerFromUser();
+    int numOfVertices = this->getIntegerFromUser();
+    if(numOfVertices != 0)
+    {
+        return numOfVertices;
+    }
+    else
+    {
+     throw std::invalid_argument("Number of nodes can't be 0");
+    }
 }
 
 int UserInterface::getNumOfEdges(int i_IsDirected, int i_NumOfVertex) noexcept(false)
@@ -87,7 +95,6 @@ Edge UserInterface::getSingleEdge(int i_NumOfVertex) noexcept(false)
     {
         throw std::invalid_argument("Invalid edge was given");
     }
-    //TODO: Validate Duplication of edges?
     else
     {
         newEdge.from = from;

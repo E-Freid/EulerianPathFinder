@@ -4,8 +4,9 @@
 #include "DirectedGraph.h"
 
 int main() {
-    Graph* graph;
+    Graph* graph = nullptr;
     UserInterface UI;
+    Edge* edges = nullptr;
 
     try{
         bool isDirected = UI.askUserIfGraphDirected();
@@ -21,7 +22,7 @@ int main() {
             graph = new UndirectedGraph(numOfVertex, numOfEdges);
         }
 
-        Edge* edges = UI.getEdges(numOfVertex, numOfEdges);
+        edges = UI.getEdges(numOfVertex, numOfEdges);
         graph->AddEdges(edges, numOfEdges);
         graph->PrintEularCircleIfExists();
 
@@ -29,12 +30,14 @@ int main() {
         delete graph;
     }
     catch (std::exception &ex) {
-        cout << "invalid input";
+        cout << "invalid input" << endl;
+        delete[] edges;
         delete graph;
         exit(1);
     }
     catch (...) {
-        cout << "Something went wrong";
+        cout << "Something went wrong" << endl;
+        delete[] edges;
         delete graph;
         exit(1);
     }

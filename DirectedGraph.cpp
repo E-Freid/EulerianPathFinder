@@ -121,7 +121,8 @@ void DirectedGraph::markEdgeAsVisited(int i_CurrNode)
 
 void DirectedGraph::advanceToTheNextUnvisitedEdge(int i_CurrNode)
 {
-    if(this->m_adjList[i_CurrNode].currUnvisitedEdge != m_adjList[i_CurrNode].neighbors.end())
+    if(this->m_adjList[i_CurrNode].currUnvisitedEdge != m_adjList[i_CurrNode].neighbors.end()
+       && this->m_adjList[i_CurrNode].currUnvisitedEdge->visited)
     {
         this->m_adjList[i_CurrNode].currUnvisitedEdge++;
     }
@@ -138,7 +139,9 @@ DirectedGraph* DirectedGraph::getTransposedGraph()
             int from = neighbor.to;
             int to = neighbor.from;
 
-            Edge edgeToAdd = {++from, ++to};
+            Edge edgeToAdd;
+            edgeToAdd.from = ++to;
+            edgeToAdd.to = ++from;
             gTransposed->addSingleEdge(edgeToAdd);
         }
     }
